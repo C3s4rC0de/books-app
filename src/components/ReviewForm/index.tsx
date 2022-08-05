@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
+import { v4 as uuidv4 } from "uuid";
 
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { FormReviewErrorsType } from "../../types/formReviewErrors";
-import { ReviewType } from "../../types/review";
+import { BookReviewType, ReviewType } from "../../types/review";
 import { styles } from "./styles";
-import { saveReview } from "../../store/slices/reviewsSlice";
+import { editReview, saveReview } from "../../store/slices/reviewsSlice";
 
 type Props = {
   bookId: string;
+  actualReview?: BookReviewType;
+  setActualReview: Dispatch<SetStateAction<BookReviewType | undefined>>;
 };
 
-const ReviewForm = ({ bookId }: Props) => {
+const ReviewForm = ({ bookId, actualReview, setActualReview }: Props) => {
+  useEffect(() => {
+    setNewReview({
+      user: actualReview?.user ?? "",
+      review: actualReview?.review ?? "",
+    });
+  }, [actualReview]);
+
   const dispatch = useAppDispatch();
 
   const [newReview, setNewReview] = useState<ReviewType>({
@@ -41,7 +51,27 @@ const ReviewForm = ({ bookId }: Props) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (validate(newReview)) {
-      dispatch(saveReview({ ...newReview, bookId }));
+      if (actualReview) {
+        dispatch(
+          editReview({
+            ...(actualReview as BookReviewType),
+            ...newReview,
+            date: new Date(),
+          })
+        );
+        setActualReview(undefined);
+      } else {
+        dispatch(
+          saveReview({
+            ...newReview,
+            bookId,
+            date: new Date(),
+            reviewId: uuidv4(),
+          })
+        );
+      }
+
+      setNewReview({ user: "", review: "" });
     }
   };
 
@@ -63,6 +93,7 @@ const ReviewForm = ({ bookId }: Props) => {
           fullWidth
           error={formErrors.user}
           helperText={formErrors.user && "Usuario requerido"}
+          value={newReview.user}
         />
 
         <TextField
@@ -78,6 +109,7 @@ const ReviewForm = ({ bookId }: Props) => {
           rows={3}
           error={formErrors.review}
           helperText={formErrors.review && "Debes escribir una reseña"}
+          value={newReview.review}
         />
 
         <Grid item xs={12} display="flex" justifyContent="end" mt={2}>

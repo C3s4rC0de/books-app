@@ -21,14 +21,16 @@ export const reviewSlice = createSlice({
       state.reviews = [...state.reviews, action.payload];
     },
     deleteReview: (state: ReviewsState, action: PayloadAction<string>) => {
-      state.reviews.filter((review) => review.bookId !== action.payload);
+      state.reviews = state.reviews.filter(
+        (review) => review.reviewId !== action.payload
+      );
     },
     editReview: (
       state: ReviewsState,
       action: PayloadAction<BookReviewType>
     ) => {
-      state.reviews.map((review) => {
-        if (review.bookId === action.payload.bookId) {
+      state.reviews = state.reviews.map((review) => {
+        if (review.reviewId === action.payload.reviewId) {
           return { ...action.payload };
         }
         return review;

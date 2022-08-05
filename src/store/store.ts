@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import {
-  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -26,9 +25,7 @@ export const store = configureStore({
   reducer: { reviews: persistedReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
     }),
 });
 

@@ -22,7 +22,7 @@ const Book = ({ book, size }: Props) => {
         width={size === "regular" ? 163 : 92.53}
         height={size === "regular" ? 250 : 125.8}
         alt="book thumbnail"
-        src={book.volumeInfo?.imageLinks?.smallThumbnail}
+        src={book.volumeInfo?.imageLinks?.smallThumbnail ?? ""}
       />
 
       <Box mt={1}>

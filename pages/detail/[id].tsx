@@ -19,6 +19,9 @@ import removeHTMLTags from "../../src/utils/removeHTMLTags";
 import { BookType } from "../../src/types/book";
 
 import { useAppSelector } from "../../src/store/hooks";
+import Reviews from "../../src/components/Reviews";
+import { BookReviewType } from "../../src/types/review";
+import { useState } from "react";
 
 type Props = {
   book: BookType;
@@ -26,6 +29,10 @@ type Props = {
 
 const BookDetail = ({ book }: Props) => {
   const router = useRouter();
+
+  const [actualReview, setActualReview] = useState<
+    BookReviewType | undefined
+  >();
 
   const reviews = useAppSelector((state) => state.reviews.reviews);
 
@@ -72,15 +79,17 @@ const BookDetail = ({ book }: Props) => {
       </Grid>
 
       <Grid container pl={3} pr={3}>
-        {reviews
-          .filter((rev) => rev.bookId === book.id)
-          .map((review) => (
-            // eslint-disable-next-line react/jsx-key
-            <h6>{review.review}</h6>
-          ))}
+        <Reviews
+          reviews={reviews.filter((rev) => rev.bookId === book.id).reverse()}
+          setActualReview={setActualReview}
+        />
       </Grid>
 
-      <ReviewForm bookId={book.id} />
+      <ReviewForm
+        bookId={book.id}
+        actualReview={actualReview}
+        setActualReview={setActualReview}
+      />
     </Grid>
   );
 };

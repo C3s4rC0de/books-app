@@ -5,6 +5,8 @@ export type ReviewType = {
 
 export type BookReviewType = {
   user: string;
+  reviewId: string;
   review: string;
   bookId: string;
+  date: Date;
 };
