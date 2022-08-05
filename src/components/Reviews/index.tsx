@@ -1,7 +1,7 @@
-import { Box, Typography } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import { BookReviewType } from "../../types/review";
+import { Box, Typography } from "@mui/material";
 import Review from "../Review";
+import { BookReviewType } from "../../types/review";
 
 type Props = {
   reviews: BookReviewType[];

@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { DeleteOutline, EditOutlined } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -8,6 +7,7 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
+import { DeleteOutline, EditOutlined } from "@mui/icons-material";
 import ReactTimeAgo from "react-time-ago";
 
 import { BookReviewType } from "../../types/review";
@@ -45,14 +45,17 @@ const Review = ({ review, setActualReview }: Props) => {
           <Typography variant="caption" sx={{ fontWeight: "bold" }}>
             {review.user}
           </Typography>
+
           <Typography ml={2} variant="caption" sx={{ color: "#A5A5A2" }}>
             &bull; <ReactTimeAgo date={review.date} locale="es-MX" />
           </Typography>
         </Box>
+
         <Box display="flex">
           <Box mr={2}>
             <EditOutlined onClick={() => handleEdit()} />
           </Box>
+
           <Box>
             <DeleteOutline onClick={() => setShowModal(true)} />
           </Box>
@@ -72,6 +75,7 @@ const Review = ({ review, setActualReview }: Props) => {
         <DialogTitle textAlign="center">
           ¿Quieres eliminar esta reseña?
         </DialogTitle>
+
         <DialogActions sx={{ flexDirection: "column" }}>
           <Button
             variant="contained"
@@ -80,10 +84,12 @@ const Review = ({ review, setActualReview }: Props) => {
           >
             Eliminar
           </Button>
+
           <Button
             variant="contained"
             color="secondary"
             sx={{ width: "100%", boxShadow: "none", margin: "0px !important" }}
+            onClick={handleClose}
           >
             Cancelar
           </Button>

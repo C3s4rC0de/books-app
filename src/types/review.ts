@@ -1,4 +1,4 @@
-export type ReviewType = {
+export type NewReviewType = {
   user: string;
   review: string;
 };

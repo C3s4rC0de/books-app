@@ -1,8 +1,7 @@
 import Link from "next/link";
-
 import { Grid } from "@mui/material";
-import { BookType } from "../../types/book";
 import Book from "../Book";
+import { BookType } from "../../types/book";
 
 type Props = {
   books: BookType[];

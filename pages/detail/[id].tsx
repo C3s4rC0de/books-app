@@ -1,27 +1,24 @@
+import { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import axios from "axios";
+import { useAppSelector } from "../../src/store/hooks";
 import {
   Box,
   CircularProgress,
   Divider,
   Grid,
-  IconButton,
   Typography,
 } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
+import GoBack from "../../src/components/GoBack";
 import Book from "../../src/components/Book";
 import ReviewForm from "../../src/components/ReviewForm";
+import Reviews from "../../src/components/Reviews";
 
 import { API_URL } from "../../src/utils/constants";
 import removeHTMLTags from "../../src/utils/removeHTMLTags";
 import { BookType } from "../../src/types/book";
-
-import { useAppSelector } from "../../src/store/hooks";
-import Reviews from "../../src/components/Reviews";
 import { BookReviewType } from "../../src/types/review";
-import { useState } from "react";
 
 type Props = {
   book: BookType;
@@ -54,13 +51,7 @@ const BookDetail = ({ book }: Props) => {
   return (
     <Grid container justifyContent="center">
       <Grid item xs={12}>
-        <Link href="/">
-          <a>
-            <IconButton sx={{ color: "gray" }} aria-label="go back">
-              <ArrowBack />
-            </IconButton>
-          </a>
-        </Link>
+        <GoBack to="/" />
       </Grid>
 
       <Grid container p={3}>
@@ -107,10 +98,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const { data } = await axios.get(`${API_URL}/${params?.id}`);
     book = data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 
   const notFound = book ? false : true;
-
   return {
     props: {
       book,

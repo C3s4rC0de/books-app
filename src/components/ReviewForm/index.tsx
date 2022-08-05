@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { FormReviewErrorsType } from "../../types/formReviewErrors";
-import { BookReviewType, ReviewType } from "../../types/review";
+import { BookReviewType, NewReviewType } from "../../types/review";
+
 import { styles } from "./styles";
 import { editReview, saveReview } from "../../store/slices/reviewsSlice";
 
@@ -15,16 +16,9 @@ type Props = {
 };
 
 const ReviewForm = ({ bookId, actualReview, setActualReview }: Props) => {
-  useEffect(() => {
-    setNewReview({
-      user: actualReview?.user ?? "",
-      review: actualReview?.review ?? "",
-    });
-  }, [actualReview]);
-
   const dispatch = useAppDispatch();
 
-  const [newReview, setNewReview] = useState<ReviewType>({
+  const [newReview, setNewReview] = useState<NewReviewType>({
     user: "",
     review: "",
   });
@@ -34,7 +28,14 @@ const ReviewForm = ({ bookId, actualReview, setActualReview }: Props) => {
     review: false,
   });
 
-  const validate = (values: ReviewType) => {
+  useEffect(() => {
+    setNewReview({
+      user: actualReview?.user ?? "",
+      review: actualReview?.review ?? "",
+    });
+  }, [actualReview]);
+
+  const validate = (values: NewReviewType) => {
     if (values.user !== "" && values.review !== "") {
       setFormErrors({ user: false, review: false });
       return true;
@@ -70,7 +71,6 @@ const ReviewForm = ({ bookId, actualReview, setActualReview }: Props) => {
           })
         );
       }
-
       setNewReview({ user: "", review: "" });
     }
   };
