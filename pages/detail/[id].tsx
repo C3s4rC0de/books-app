@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -55,10 +55,10 @@ const BookDetail = ({ book }: Props) => {
       </Grid>
 
       <Grid container p={3}>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={4}>
           <Book book={book} size="regular" />
         </Grid>
-        <Grid item xs={12} mt={3}>
+        <Grid item xs={12} md={8} mt={3}>
           <Typography variant="body1">
             {removeHTMLTags(book.volumeInfo.description)}
           </Typography>
@@ -98,9 +98,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const { data } = await axios.get(`${API_URL}/${params?.id}`);
     book = data;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 
   const notFound = book ? false : true;
   return {

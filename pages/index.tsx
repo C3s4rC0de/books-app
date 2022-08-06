@@ -1,8 +1,12 @@
 import type { NextPage } from "next";
+import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useDebounce } from "use-debounce";
 
 import { Box, Container } from "@mui/material";
 import Books from "../src/components/Books";
@@ -14,6 +18,9 @@ import { BookType } from "../src/types/book";
 import { API_URL } from "../src/utils/constants";
 
 const Home: NextPage = () => {
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.up("md"));
+
   const [books, setBooks] = useState<BookType[]>([]);
   const [search, setSearch] = useState<string>("");
 
@@ -26,12 +33,14 @@ const Home: NextPage = () => {
     setBooks(data.items);
   };
 
+  const [debouncedSearch] = useDebounce<string>(search, 300);
+
   useEffect(() => {
-    if (search) {
+    if (debouncedSearch) {
       getBooks();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [debouncedSearch]);
 
   return (
     <Container>
@@ -48,8 +57,14 @@ const Home: NextPage = () => {
         <SearchBar searchHandler={searchHandler} />
       </Box>
 
-      <TopBooks books={books.slice(0, 2)} />
-      <Books books={books.slice(2)} />
+      {md ? (
+        <Books books={books} />
+      ) : (
+        <>
+          <TopBooks books={books.slice(0, 2)} />
+          <Books books={books.slice(2)} />
+        </>
+      )}
     </Container>
   );
 };

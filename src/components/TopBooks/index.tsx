@@ -12,7 +12,7 @@ const TopBooks = ({ books }: Props) => {
   return (
     <Grid container mt="26px" mb="26px" spacing={1}>
       {books.map((book) => (
-        <Grid key={book.id} item xs={6}>
+        <Grid key={book.id} item xs={6} md={3}>
           <Link href={`/detail/${book.id}`}>
             <a>
               <Book book={book} size="regular" />
