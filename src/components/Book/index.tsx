@@ -30,7 +30,11 @@ const Book = ({ book, size }: Props) => {
         <Rating
           readonly
           size={size === "regular" ? 20 : 15}
-          ratingValue={book.volumeInfo.averageRating * 20}
+          ratingValue={
+            book?.volumeInfo?.averageRating
+              ? book?.volumeInfo?.averageRating * 20
+              : 0
+          }
         />
       </Box>
 

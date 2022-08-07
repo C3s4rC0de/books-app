@@ -60,7 +60,7 @@ const BookDetail = ({ book }: Props) => {
         </Grid>
         <Grid item xs={12} md={8} mt={3}>
           <Typography variant="body1">
-            {removeHTMLTags(book.volumeInfo.description)}
+            {removeHTMLTags(book?.volumeInfo?.description)}
           </Typography>
         </Grid>
       </Grid>

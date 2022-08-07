@@ -4,26 +4,29 @@ export type BookType = {
   etag: string;
   selfLink: string;
   volumeInfo: {
-    title: string;
-    authors: string[];
-    publisher: string;
-    publishedDate: string;
-    description: string;
-    industryIdentifiers: {
-      type: string;
-      identifier: number;
+    title?: string;
+    authors?: string[];
+    publisher?: string;
+    publishedDate?: string;
+    description?: string;
+    industryIdentifiers?: {
+      type?: string;
+      identifier?: number;
     }[];
-
-    readingModes: {
-      text: boolean;
-      image: boolean;
+    readingModes?: {
+      text?: boolean;
+      image?: boolean;
     };
-    pageCount: number;
-    printType: string;
-    categories: string[];
-    averageRating: number;
-    ratingsCount: 123;
-    maturityRating: string;
+    pageCount?: number;
+    printedPageCount?: number;
+    dimensions?: {
+      height?: "18.00 cm";
+    };
+    printType?: string;
+    categories?: string[];
+    averageRating?: number;
+    ratingsCount?: number;
+    maturityRating?: string;
     allowAnonLogging: boolean;
     contentVersion: string;
     panelizationSummary: {
@@ -37,14 +40,22 @@ export type BookType = {
     language: string;
     previewLink: string;
     infoLink: string;
-    canonicalVolumeLink: string;
+    canonicalVolumeLink?: string;
   };
-  saleInfo: {
+  layerInfo?: {
+    layers?: [
+      {
+        layerId?: "geo";
+        volumeAnnotationsVersion?: 15;
+      }
+    ];
+  };
+  saleInfo?: {
     country: string;
     saleability: string;
     isEbook: boolean;
   };
-  accessInfo: {
+  accessInfo?: {
     country: string;
     viewability: string;
     embeddable: boolean;
@@ -52,17 +63,17 @@ export type BookType = {
     textToSpeechPermission: string;
     epub: {
       isAvailable: boolean;
-      acsTokenLink: string;
+      acsTokenLink?: string;
     };
     pdf: {
       isAvailable: boolean;
-      acsTokenLink: string;
+      acsTokenLink?: string;
     };
     webReaderLink: string;
     accessViewStatus: string;
     quoteSharingAllowed: boolean;
   };
-  searchInfo: {
+  searchInfo?: {
     textSnippet: string;
   };
 };
