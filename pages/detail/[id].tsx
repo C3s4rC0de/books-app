@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useAppSelector } from "../../src/store/hooks";
@@ -85,15 +85,7 @@ const BookDetail = ({ book }: Props) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths: any = [];
-  return {
-    paths,
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   let book: BookType | undefined;
   try {
     const { data } = await axios.get(`${API_URL}/${params?.id}`);
