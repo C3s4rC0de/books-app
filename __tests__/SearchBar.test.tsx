@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from "../../../test/test-utils";
+import { render, screen, waitFor } from "../test/test-utils";
 import userEvent from "@testing-library/user-event";
 
-import SearchBar from ".";
+import SearchBar from "../src/components/SearchBar";
+import React from "react";
 
 const mock = jest.fn();
 

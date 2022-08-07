@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from "../../../test/test-utils";
-import Reviews from ".";
-import { BookReviewType } from "../../types/review";
-import { store } from "../../store/store";
-import { deleteReview, saveReview } from "../../store/slices/reviewsSlice";
+import { render, screen, waitFor } from "../test/test-utils";
+import Reviews from "../src/components/Reviews";
+import { BookReviewType } from "../src/types/review";
+import { store } from "../src/store/store";
+import { deleteReview, saveReview } from "../src/store/slices/reviewsSlice";
+import React from "react";
 
 const dummyReviews: BookReviewType[] = [
   {

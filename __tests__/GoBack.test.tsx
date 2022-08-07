@@ -1,6 +1,7 @@
-import { render, screen } from "../../../test/test-utils";
+import { render, screen } from "../test/test-utils";
 
-import GoBack from ".";
+import GoBack from "../src/components/GoBack";
+import React from "react";
 
 describe("GoBack component tests", () => {
   it("Should have the correct href", () => {

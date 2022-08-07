@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from "../../../test/test-utils";
-import ReviewForm from ".";
-import { BookReviewType } from "../../types/review";
+import { render, screen, waitFor } from "../test/test-utils";
+import ReviewForm from "../src/components/ReviewForm";
+import { BookReviewType } from "../src/types/review";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 
 const dummyReview: BookReviewType = {
   user: "Juan",

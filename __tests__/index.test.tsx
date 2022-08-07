@@ -1,6 +1,7 @@
 import { render, screen } from "../test/test-utils";
 
-import Home from ".";
+import Home from "../pages";
+import React from "react";
 
 describe("Home page tests", () => {
   it("Should render the app logo", () => {

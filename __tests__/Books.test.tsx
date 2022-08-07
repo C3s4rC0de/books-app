@@ -1,7 +1,8 @@
-import { render, screen } from "../../../test/test-utils";
+import { render, screen } from "../test/test-utils";
 
-import Books from ".";
-import { BookType } from "../../types/book";
+import Books from "../src/components/Books";
+import { BookType } from "../src/types/book";
+import React from "react";
 
 const dummyBooks: BookType[] = [
   {

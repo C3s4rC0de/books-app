@@ -1,6 +1,7 @@
-import { fireEvent, render, screen, waitFor } from "../../../test/test-utils";
-import Review from ".";
-import { BookReviewType } from "../../types/review";
+import { fireEvent, render, screen, waitFor } from "../test/test-utils";
+import Review from "../src/components/Review";
+import { BookReviewType } from "../src/types/review";
+import React from "react";
 
 const dummyReview: BookReviewType = {
   user: "Juan",

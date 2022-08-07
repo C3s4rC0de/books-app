@@ -1,6 +1,7 @@
-import { render, screen } from "../../test/test-utils";
-import { BookType } from "../../src/types/book";
-import BookDetail from "./[id]";
+import { render, screen } from "../test/test-utils";
+import { BookType } from "../src/types/book";
+import BookDetail from "../pages/detail/[id]";
+import React from "react";
 
 const dummyBook: BookType = {
   kind: " books#volume",
