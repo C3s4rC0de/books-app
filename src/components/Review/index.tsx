@@ -53,11 +53,17 @@ const Review = ({ review, setActualReview }: Props) => {
 
         <Box display="flex">
           <Box mr={2}>
-            <EditOutlined onClick={() => handleEdit()} />
+            <EditOutlined
+              onClick={() => handleEdit()}
+              sx={{ cursor: "pointer" }}
+            />
           </Box>
 
           <Box>
-            <DeleteOutline onClick={() => setShowModal(true)} />
+            <DeleteOutline
+              onClick={() => setShowModal(true)}
+              sx={{ cursor: "pointer" }}
+            />
           </Box>
         </Box>
       </Box>
